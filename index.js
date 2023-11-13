@@ -27,6 +27,25 @@ const server = http.createServer((req, res) => {
       }
     );
   }
+
+  if (req.url === '/contact') {
+    fs.readFile(
+      path.join(__dirname, 'public', 'contact-me.html'),
+      (err, content) => {
+        if (err) throw err;
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.write(content);
+        res.end();
+      }
+    );
+  }
+
+  fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
+    if (err) throw err;
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write(content);
+    res.end();
+  });
 });
 
 const port = 3000;
